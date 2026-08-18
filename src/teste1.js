@@ -896,7 +896,7 @@ function menuClientes() {
         limparTela();
         titulo("MENU DE CLIENTES");
 
-        console.log("1 - Cadastrar cliente");
+        console.log("1 - Cadastrar clientoooo");
         console.log("2 - Listar clientes");
         console.log("3 - Alterar cliente");
         console.log("4 - Excluir cliente");
