@@ -1,5 +1,5 @@
 import leia from "readline-sync";
-import { clientes, pedidos, gerarIdCliente } from "../dados/banco.js";
+import { clientes, pedidos, gerarIdCliente } from "../2.banco/dados.js";
 
 export function cadastrarCliente() {
     console.clear();

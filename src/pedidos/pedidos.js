@@ -1,10 +1,11 @@
 import leia from "readline-sync";
-import {
-    clientes,
-    pizzas,
-    pedidos,
-    gerarIdPedido
-} from "../dados/banco.js";
+    import {
+        clientes,
+        pizzas,
+        bebidas,
+        pedidos,
+        gerarIdPedido
+    } from "../2.banco/dados.js";
 
 export function criarPedido() {
     console.clear();
@@ -18,8 +19,8 @@ export function criarPedido() {
         return;
     }
 
-    if (pizzas.length == 0) {
-        console.log("\nNao existem pizzas cadastradas.");
+    if (pizzas.length == 0 && bebidas.length == 0) {
+        console.log("\nNao existem produtos cadastrados.");
         return;
     }
 
@@ -28,14 +29,11 @@ export function criarPedido() {
     let i = 0;
 
     while (i < clientes.length) {
-        console.log(
-            clientes[i].id + " - " + clientes[i].nome
-        );
-
+        console.log(clientes[i].id + " - " + clientes[i].nome);
         i++;
     }
 
-    let clienteId = leia.questionInt("\nDigite o ID do cliente: ");
+    let clienteId = leia.questionInt("\nDigite o ID do cliente:  ");
 
     let clienteExiste = false;
 
@@ -45,7 +43,6 @@ export function criarPedido() {
         if (clientes[i].id == clienteId) {
             clienteExiste = true;
         }
-
         i++;
     }
 
@@ -58,106 +55,241 @@ export function criarPedido() {
     let continuar = true;
 
     while (continuar == true) {
+
         console.log("\n====================================");
         console.log("             CARDAPIO");
         console.log("====================================");
+
+        console.log("\n--- PIZZAS ---");
 
         i = 0;
 
         while (i < pizzas.length) {
             if (pizzas[i].disponivel == true) {
                 console.log(
-                    pizzas[i].id +
-                    " - " +
-                    pizzas[i].nome +
-                    " - R$ " +
-                    pizzas[i].preco.toFixed(2)
+                    "P" + pizzas[i].id + " - " + pizzas[i].nome + " - R$ " + pizzas[i].preco.toFixed(2)
                 );
             }
-
             i++;
         }
 
-        console.log("0 - Finalizar pedido");
+        console.log("\n--- BEBIDAS ---");
 
-        let pizzaId = leia.questionInt("\nID da pizza: ");
+        i = 0;
 
-        if (pizzaId == 0) {
+        while (i < bebidas.length) {
+
+            if (bebidas[i].disponivel == true) {
+                console.log(
+                    "B" + bebidas[i].id + " - " + bebidas[i].nome + " - R$ " + bebidas[i].preco.toFixed(2)
+                );
+            }
+            i++;
+        }
+
+        console.log("\n0 - Finalizar pedido");
+
+        let produto = leia.question("\nDigite o codigo do produto: ");
+
+        if (produto == "0") {
+
             continuar = false;
+
         } else {
-            let pizzaEncontrada = false;
-            let precoPizza = 0;
 
-            i = 0;
+            let tipo = produto.charAt(0);
+            let numero = produto.substring(1);
+            let id = Number(numero);
 
-            while (i < pizzas.length) {
-                if (pizzas[i].id == pizzaId) {
-                    if (pizzas[i].disponivel == true) {
-                        pizzaEncontrada = true;
-                        precoPizza = pizzas[i].preco;
+            let encontrado = false;
+            let preco = 0;
+            let nomeProduto = "";
+
+            // ==========================================
+            // VERIFICAR PIZZA
+            // ==========================================
+
+            if (tipo == "P" || tipo == "p") {
+
+                i = 0;
+
+                while (i < pizzas.length) {
+
+                    if (pizzas[i].id == id) {
+
+                        if (pizzas[i].disponivel == true) {
+
+                            encontrado = true;
+                            preco = pizzas[i].preco;
+                            nomeProduto = pizzas[i].nome;
+                        }
                     }
+
+                    i++;
                 }
 
-                i++;
             }
 
-            if (pizzaEncontrada == false) {
-                console.log("\nPizza invalida ou indisponivel.");
-            } else {
+            // ==========================================
+            // VERIFICAR BEBIDA
+            // ==========================================
+
+            else if (tipo == "B" || tipo == "b") {
+
+                i = 0;
+
+                while (i < bebidas.length) {
+
+                    if (bebidas[i].id == id) {
+
+                        if (bebidas[i].disponivel == true) {
+
+                            encontrado = true;
+                            preco = bebidas[i].preco;
+                            nomeProduto = bebidas[i].nome;
+                        }
+                    }
+
+                    i++;
+                }
+            }
+
+            // ==========================================
+            // PRODUTO INVALIDO
+            // ==========================================
+
+            else {
+
+                console.log("\nCodigo de produto invalido.");
+            }
+
+            // ==========================================
+            // ADICIONAR PRODUTO
+            // ==========================================
+
+            if (encontrado == true) {
+
                 let quantidade = leia.questionInt("Quantidade: ");
 
                 if (quantidade <= 0) {
+
                     console.log("\nQuantidade invalida.");
+
                 } else {
+
                     let item = {
-                        pizzaId: pizzaId,
+                        tipo: tipo.toUpperCase(),
+                        produtoId: id,
+                        nome: nomeProduto,
                         quantidade: quantidade,
-                        precoUnitario: precoPizza
+                        precoUnitario: preco
                     };
 
                     itens.push(item);
 
-                    console.log("\nPizza adicionada ao pedido!");
+                    console.log(
+                        "\n" +
+                        nomeProduto +
+                        " adicionado ao pedido!"
+                    );
+                }
+
+            } else {
+
+                if (tipo == "P" || tipo == "p" ||
+                    tipo == "B" || tipo == "b") {
+
+                    console.log(
+                        "\nProduto nao encontrado ou indisponivel."
+                    );
                 }
             }
         }
     }
 
+    // ==========================================
+    // VERIFICAR SE EXISTEM ITENS
+    // ==========================================
+
     if (itens.length == 0) {
+
         console.log("\nNenhum produto foi adicionado.");
         console.log("Pedido cancelado.");
+
         return;
     }
+
+    // ==========================================
+    // CALCULAR TOTAL
+    // ==========================================
 
     let total = 0;
 
     i = 0;
 
     while (i < itens.length) {
+
         total =
             total +
-            itens[i].quantidade * itens[i].precoUnitario;
+            itens[i].quantidade *
+            itens[i].precoUnitario;
 
         i++;
     }
+
+    // ==========================================
+    // CRIAR PEDIDO
+    // ==========================================
 
     let pedido = {
         id: gerarIdPedido(),
         clienteId: clienteId,
         itens: itens,
         total: total,
-        status: "Recebido"
+        status: "Em preparo"
     };
 
     pedidos.push(pedido);
+
+    // ==========================================
+    // MOSTRAR PEDIDO
+    // ==========================================
 
     console.log("\n====================================");
     console.log("         PEDIDO CRIADO");
     console.log("====================================");
 
     console.log("Numero do pedido: " + pedido.id);
-    console.log("Total: R$ " + pedido.total.toFixed(2));
-    console.log("Status: " + pedido.status);
+
+    console.log("\nItens:");
+
+    i = 0;
+
+    while (i < pedido.itens.length) {
+
+        console.log(
+            pedido.itens[i].nome +
+            " x" +
+            pedido.itens[i].quantidade +
+            " - R$ " +
+            (
+                pedido.itens[i].quantidade *
+                pedido.itens[i].precoUnitario
+            ).toFixed(2)
+        );
+
+        i++;
+    }
+
+    console.log(
+        "\nTotal: R$ " +
+        pedido.total.toFixed(2)
+    );
+
+    console.log(
+        "Status: " +
+        pedido.status
+    );
 }
 
 export function listarPedidos() {
@@ -257,13 +389,7 @@ export function alterarStatusPedido() {
     let i = 0;
 
     while (i < pedidos.length) {
-        console.log(
-            "#" +
-            pedidos[i].id +
-            " - " +
-            pedidos[i].status
-        );
-
+        console.log( "#" + pedidos[i].id + " - " + pedidos[i].status);
         i++;
     }
 

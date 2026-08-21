@@ -1,5 +1,5 @@
 import leia from "readline-sync";
-import { pizzas, pedidos, gerarIdPizza } from "../dados/banco.js";
+import { pizzas, pedidos, gerarIdPizza } from "../2.banco/dados.js";
 
 export function cadastrarPizza() {
     console.clear();
