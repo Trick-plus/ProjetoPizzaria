@@ -44,7 +44,7 @@ export function menuPrincipal() {
         console.log("     SISTEMA DE GERENCIAMENTO");
         console.log("           DE PIZZARIA");
         console.log("====================================");
-
+        
         console.log("\n1 - Clientes");
         console.log("2 - Pizzas");
         console.log("3 - Bebidas");

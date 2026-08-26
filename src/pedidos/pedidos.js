@@ -105,10 +105,7 @@ export function criarPedido() {
             let preco = 0;
             let nomeProduto = "";
 
-            // ==========================================
             // VERIFICAR PIZZA
-            // ==========================================
-
             if (tipo == "P" || tipo == "p") {
 
                 i = 0;
@@ -129,11 +126,8 @@ export function criarPedido() {
                 }
 
             }
-
-            // ==========================================
+  
             // VERIFICAR BEBIDA
-            // ==========================================
-
             else if (tipo == "B" || tipo == "b") {
 
                 i = 0;
@@ -154,19 +148,14 @@ export function criarPedido() {
                 }
             }
 
-            // ==========================================
+           
             // PRODUTO INVALIDO
-            // ==========================================
-
             else {
 
                 console.log("\nCodigo de produto invalido.");
             }
 
-            // ==========================================
             // ADICIONAR PRODUTO
-            // ==========================================
-
             if (encontrado == true) {
 
                 let quantidade = leia.questionInt("Quantidade: ");
@@ -207,10 +196,7 @@ export function criarPedido() {
         }
     }
 
-    // ==========================================
     // VERIFICAR SE EXISTEM ITENS
-    // ==========================================
-
     if (itens.length == 0) {
 
         console.log("\nNenhum produto foi adicionado.");
@@ -219,10 +205,8 @@ export function criarPedido() {
         return;
     }
 
-    // ==========================================
-    // CALCULAR TOTAL
-    // ==========================================
 
+    // CALCULAR TOTAL
     let total = 0;
 
     i = 0;
@@ -237,9 +221,9 @@ export function criarPedido() {
         i++;
     }
 
-    // ==========================================
+
     // CRIAR PEDIDO
-    // ==========================================
+  
 
     let pedido = {
         id: gerarIdPedido(),

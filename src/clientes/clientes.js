@@ -1,6 +1,16 @@
 import leia from "readline-sync";
 import { clientes, pedidos, gerarIdCliente } from "../2.banco/dados.js";
 
+function formatarData(data) {
+    return new Date(data).toLocaleString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+}
+
 export function cadastrarCliente() {
     console.clear();
 
@@ -21,7 +31,8 @@ export function cadastrarCliente() {
         id: gerarIdCliente(),
         nome: nome,
         telefone: telefone,
-        endereco: endereco
+        endereco: endereco,
+        atualizadoEm: new Date().toISOString()
     };
 
     clientes.push(cliente);
@@ -48,6 +59,7 @@ export function listarClientes() {
         console.log("Nome: " + clientes[i].nome);
         console.log("Telefone: " + clientes[i].telefone);
         console.log("Endereco: " + clientes[i].endereco);
+        console.log("Atualizado em: " + formatarData(clientes[i].atualizadoEm));
         console.log("------------------------------------");
 
         i++;
@@ -73,6 +85,7 @@ export function buscarCliente() {
             console.log("Nome: " + clientes[i].nome);
             console.log("Telefone: " + clientes[i].telefone);
             console.log("Endereco: " + clientes[i].endereco);
+            console.log("Atualizado em: " + formatarData(clientes[i].atualizadoEm));
 
             encontrado = true;
         }
@@ -109,20 +122,29 @@ export function alterarCliente() {
             let nome = leia.question("Novo nome: ");
             let telefone = leia.question("Novo telefone: ");
             let endereco = leia.question("Novo endereco: ");
+            let foiAlterado = false;
 
             if (nome != "") {
                 clientes[i].nome = nome;
+                foiAlterado = true;
             }
 
             if (telefone != "") {
                 clientes[i].telefone = telefone;
+                foiAlterado = true;
             }
 
             if (endereco != "") {
                 clientes[i].endereco = endereco;
+                foiAlterado = true;
             }
 
-            console.log("\nCliente alterado com sucesso!");
+            if (foiAlterado == true) {
+                clientes[i].atualizadoEm = new Date().toISOString();
+                console.log("\nCliente alterado com sucesso!");
+            } else {
+                console.log("\nNenhum dado foi alterado.");
+            }
 
             encontrado = true;
         }

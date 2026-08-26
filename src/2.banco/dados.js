@@ -3,19 +3,22 @@ export const clientes = [
         id: 1,
         nome: "Joao Silva",
         telefone: "(48) 99999-1111",
-        endereco: "Rua das Flores, 100"
+        endereco: "Rua das Flores, 100",
+        atualizadoEm: new Date().toISOString()
     },
     {
         id: 2,
         nome: "Maria Souza",
         telefone: "(48) 98888-2222",
-        endereco: "Rua Central, 250"
+        endereco: "Rua Central, 250",
+        atualizadoEm: new Date().toISOString()
     },
     {
         id: 3,
         nome: "Pedro Santos",
         telefone: "(48) 97777-3333",
-        endereco: "Avenida Brasil, 500"
+        endereco: "Avenida Brasil, 500",
+        atualizadoEm: new Date().toISOString()
     }
 ];
 
