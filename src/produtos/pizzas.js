@@ -1,5 +1,15 @@
 import leia from "readline-sync";
-import { pizzas, pedidos, gerarIdPizza } from "../2.banco/dados.js";
+import { pizzas, pedidos, gerarIdPizza, salvarDados } from "../2.banco/dados.js";
+
+function formatarData(data) {
+    return new Date(data).toLocaleString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+}
 
 export function cadastrarPizza() {
     console.clear();
@@ -22,10 +32,12 @@ export function cadastrarPizza() {
         nome: nome,
         descricao: descricao,
         preco: preco,
-        disponivel: true
+        disponivel: true,
+        atualizadoEm: new Date().toISOString()
     };
 
     pizzas.push(pizza);
+    salvarDados();
 
     console.log("\nPizza cadastrada com sucesso!");
 }
@@ -49,13 +61,13 @@ export function listarPizzas() {
         console.log("Nome: " + pizzas[i].nome);
         console.log("Descricao: " + pizzas[i].descricao);
         console.log("Preco: R$ " + pizzas[i].preco.toFixed(2));
-        
+
         if (pizzas[i].disponivel == true) {
             console.log("Disponivel: SIM");
         } else {
             console.log("Disponivel: NAO");
         }
-
+        console.log("Atualizado em: " + formatarData(pizzas[i].atualizadoEm));
         console.log("------------------------------------");
 
         i++;
@@ -81,7 +93,7 @@ export function buscarPizza() {
             console.log("Nome: " + pizzas[i].nome);
             console.log("Descricao: " + pizzas[i].descricao);
             console.log("Preco: R$ " + pizzas[i].preco.toFixed(2));
-
+            console.log("Atualizado em: " + formatarData(pizzas[i].atualizadoEm));
             encontrado = true;
         }
 
@@ -117,20 +129,30 @@ export function alterarPizza() {
             let nome = leia.question("Novo nome: ");
             let descricao = leia.question("Nova descricao: ");
             let preco = leia.questionFloat("Novo preco: R$ ");
+            let foiAlterado = false;
 
             if (nome != "") {
                 pizzas[i].nome = nome;
+                foiAlterado = true;
             }
 
             if (descricao != "") {
                 pizzas[i].descricao = descricao;
+                foiAlterado = true;
             }
 
             if (preco > 0) {
                 pizzas[i].preco = preco;
+                foiAlterado = true;
             }
 
-            console.log("\nPizza alterada com sucesso!");
+            if (foiAlterado == true) {
+                pizzas[i].atualizadoEm = new Date().toISOString();
+                salvarDados();
+                console.log("\nPizza alterada com sucesso!");
+            } else {
+                console.log("\nNenhum dado foi alterado.");
+            }
 
             encontrado = true;
         }
@@ -170,6 +192,9 @@ export function alterarDisponibilidade() {
                 pizzas[i].disponivel = true;
                 console.log("\nPizza marcada como disponivel.");
             }
+
+            pizzas[i].atualizadoEm = new Date().toISOString();
+            salvarDados();
 
             encontrado = true;
         }
@@ -228,6 +253,7 @@ export function excluirPizza() {
     while (i < pizzas.length) {
         if (pizzas[i].id == id) {
             pizzas.splice(i, 1);
+            salvarDados();
 
             console.log("\nPizza excluida com sucesso!");
 

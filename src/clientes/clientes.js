@@ -1,5 +1,5 @@
 import leia from "readline-sync";
-import { clientes, pedidos, gerarIdCliente } from "../2.banco/dados.js";
+import { clientes, pedidos, gerarIdCliente, salvarDados } from "../2.banco/dados.js";
 
 function formatarData(data) {
     return new Date(data).toLocaleString("pt-BR", {
@@ -36,6 +36,7 @@ export function cadastrarCliente() {
     };
 
     clientes.push(cliente);
+    salvarDados();
 
     console.log("\nCliente cadastrado com sucesso!");
 }
@@ -141,6 +142,7 @@ export function alterarCliente() {
 
             if (foiAlterado == true) {
                 clientes[i].atualizadoEm = new Date().toISOString();
+                salvarDados();
                 console.log("\nCliente alterado com sucesso!");
             } else {
                 console.log("\nNenhum dado foi alterado.");
@@ -196,6 +198,7 @@ export function excluirCliente() {
     while (i < clientes.length) {
         if (clientes[i].id == id) {
             clientes.splice(i, 1);
+            salvarDados();
 
             console.log("\nCliente excluido com sucesso!");
 

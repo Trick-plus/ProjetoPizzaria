@@ -1,5 +1,15 @@
 import leia from "readline-sync";
-import { bebidas, pedidos, gerarIdBebida } from "../2.banco/dados.js";
+import { bebidas, pedidos, gerarIdBebida, salvarDados } from "../2.banco/dados.js";
+
+function formatarData(data) {
+    return new Date(data).toLocaleString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+}
 
 export function cadastrarBebida() {
     console.clear();
@@ -22,10 +32,12 @@ export function cadastrarBebida() {
         nome: nome,
         descricao: descricao,
         preco: preco,
-        disponivel: true
+        disponivel: true,
+        atualizadoEm: new Date().toISOString()
     };
 
     bebidas.push(bebida);
+    salvarDados();
 
     console.log("\nBebida cadastrada com sucesso!");
 }
@@ -55,7 +67,7 @@ export function listarBebidas() {
         } else {
             console.log("Disponivel: NAO");
         }
-
+        console.log("Atualizado em: " + formatarData(bebidas[i].atualizadoEm));
         console.log("------------------------------------");
 
         i++;
@@ -81,7 +93,7 @@ export function buscarBebida() {
             console.log("Nome: " + bebidas[i].nome);
             console.log("Descricao: " + bebidas[i].descricao);
             console.log("Preco: R$ " + bebidas[i].preco.toFixed(2));
-
+            console.log("Atualizado em: " + formatarData(bebidas[i].atualizadoEm));
             encontrado = true;
         }
 
@@ -117,20 +129,30 @@ export function alterarBebida() {
             let nome = leia.question("Novo nome: ");
             let descricao = leia.question("Nova descricao: ");
             let preco = leia.questionFloat("Novo preco: R$ ");
+            let foiAlterado = false;
 
             if (nome != "") {
                 bebidas[i].nome = nome;
+                foiAlterado = true;
             }
 
             if (descricao != "") {
                 bebidas[i].descricao = descricao;
+                foiAlterado = true;
             }
 
             if (preco > 0) {
                 bebidas[i].preco = preco;
+                foiAlterado = true;
             }
 
-            console.log("\nBebida alterada com sucesso!");
+            if (foiAlterado == true) {
+                bebidas[i].atualizadoEm = new Date().toISOString();
+                salvarDados();
+                console.log("\nBebida alterada com sucesso!");
+            } else {
+                console.log("\nNenhum dado foi alterado.");
+            }
 
             encontrado = true;
         }
@@ -170,6 +192,9 @@ export function alterarDisponibilidade() {
                 bebidas[i].disponivel = true;
                 console.log("\nBebida marcada como disponivel.");
             }
+
+            bebidas[i].atualizadoEm = new Date().toISOString();
+            salvarDados();
 
             encontrado = true;
         }
@@ -228,6 +253,7 @@ export function excluirBebida() {
     while (i < bebidas.length) {
         if (bebidas[i].id == id) {
             bebidas.splice(i, 1);
+            salvarDados();
 
             console.log("\nBebida excluida com sucesso!");
 

@@ -4,7 +4,8 @@ import leia from "readline-sync";
         pizzas,
         bebidas,
         pedidos,
-        gerarIdPedido
+        gerarIdPedido,
+        salvarDados
     } from "../2.banco/dados.js";
 
 export function criarPedido() {
@@ -234,6 +235,7 @@ export function criarPedido() {
     };
 
     pedidos.push(pedido);
+    salvarDados();
 
     // ==========================================
     // MOSTRAR PEDIDO
@@ -417,6 +419,7 @@ export function alterarStatusPedido() {
                 "\nStatus alterado para: " +
                 pedidos[i].status
             );
+            salvarDados();
         }
 
         i++;
@@ -450,6 +453,7 @@ export function excluirPedido() {
 
             if (pedidos[i].status == "Cancelado") {
                 pedidos.splice(i, 1);
+                salvarDados();
 
                 console.log("\nPedido excluido com sucesso.");
             } else {

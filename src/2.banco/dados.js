@@ -1,103 +1,34 @@
-export const clientes = [
-    {
-        id: 1,
-        nome: "Joao Silva",
-        telefone: "(48) 99999-1111",
-        endereco: "Rua das Flores, 100",
-        atualizadoEm: new Date().toISOString()
-    },
-    {
-        id: 2,
-        nome: "Maria Souza",
-        telefone: "(48) 98888-2222",
-        endereco: "Rua Central, 250",
-        atualizadoEm: new Date().toISOString()
-    },
-    {
-        id: 3,
-        nome: "Pedro Santos",
-        telefone: "(48) 97777-3333",
-        endereco: "Avenida Brasil, 500",
-        atualizadoEm: new Date().toISOString()
-    }
-];
+import fs from "node:fs";
 
-export const pizzas = [
-    {
-        id: 1,
-        nome: "Calabresa",
-        descricao: "Calabresa, queijo e cebola",
-        preco: 45.00,
-        disponivel: true
-    },
-    {
-        id: 2,
-        nome: "Frango com Catupiry",
-        descricao: "Frango, queijo e catupiry",
-        preco: 50.00,
-        disponivel: true
-    },
-    {
-        id: 3,
-        nome: "Portuguesa",
-        descricao: "Presunto, queijo, ovo, cebola e azeitona",
-        preco: 48.00,
-        disponivel: true
-    },
-    {
-        id: 4,
-        nome: "Chocolate com Morango",
-        descricao: "Chocolate e morango",
-        preco: 42.00,
-        disponivel: true
-    }
-];
+const arquivoDados = new URL("./dados.json", import.meta.url);
+const dados = JSON.parse(fs.readFileSync(arquivoDados, "utf8"));
 
-export const bebidas = [
-    {
-        id: 1,
-        nome: "Coca-Cola 2L",
-        preco: 12.00,
-        disponivel: true
-    },
-    {
-        id: 2,
-        nome: "Guarana Antarctica 2L",
-        preco: 10.00,
-        disponivel: true
-    },
-    {
-        id: 3,
-        nome: "Coca-Cola Lata",
-        preco: 6.00,
-        disponivel: true
-    },
-    {
-        id: 4,
-        nome: "Guarana Lata",
-        preco: 5.00,
-        disponivel: true
-    },
-    {
-        id: 5,
-        nome: "Fanta Laranja 2L",
-        preco: 10.00,
-        disponivel: true
-    },
-    {
-        id: 6,
-        nome: "Agua 500ml",
-        preco: 4.00,
-        disponivel: true
-    }
-];
+export const clientes = dados.clientes;
+export const pizzas = dados.pizzas;
+export const bebidas = dados.bebidas;
+export const pedidos = dados.pedidos;
 
-export const pedidos = [];
+export let idCliente = dados.proximosIds.cliente;
+export let idPizza = dados.proximosIds.pizza;
+export let idBebida = dados.proximosIds.bebida;
+export let idPedido = dados.proximosIds.pedido;
 
-export let idCliente = 4;
-export let idPizza = 5;
-export let idBebida = 7;
-export let idPedido = 1;
+export function salvarDados() {
+    const conteudo = {
+        clientes,
+        pizzas,
+        bebidas,
+        pedidos,
+        proximosIds: {
+            cliente: idCliente,
+            pizza: idPizza,
+            bebida: idBebida,
+            pedido: idPedido
+        }
+    };
+
+    fs.writeFileSync(arquivoDados, JSON.stringify(conteudo, null, 2));
+}
 
 export function gerarIdCliente() {
     let id = idCliente;
