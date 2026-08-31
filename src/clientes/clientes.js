@@ -1,22 +1,6 @@
 import leia from "readline-sync";
 import { clientes, pedidos, gerarIdCliente, salvarDados } from "../2.banco/dados.js";
-
-function formatarData(data) {
-    return new Date(data).toLocaleString("pt-BR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-    });
-}
-
-function mostrarCabecalhoCadastro(titulo) {
-    console.clear();
-    console.log("====================================");
-    console.log(titulo);
-    console.log("====================================");
-}
+import { formatarData, mostrarCabecalhoCadastro } from "../utilitarios/utilitarios.js";
 
 export function cadastrarCliente() {
     mostrarCabecalhoCadastro("CADASTRAR CLIENTE");

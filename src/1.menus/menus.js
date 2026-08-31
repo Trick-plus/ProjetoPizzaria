@@ -1,5 +1,7 @@
 import leia from "readline-sync";
 
+import { limparTela } from "../utilitarios/utilitarios.js";
+
 import {
     cadastrarCliente,
     listarClientes,
@@ -33,10 +35,6 @@ import {
     alterarDisponibilidade as alterarDisponibilidadeBebida,
     excluirBebida
 } from "../produtos/bebidas.js";
-
-function limparTela() {
-    console.clear();
-}
 
 export function menuPrincipal() {
     let opcao = -1;
