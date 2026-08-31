@@ -56,6 +56,7 @@ export function criarPedido() {
     let continuar = true;
 
     while (continuar == true) {
+        console.clear();
 
         console.log("\n====================================");
         console.log("             CARDAPIO");
@@ -240,6 +241,8 @@ export function criarPedido() {
     // ==========================================
     // MOSTRAR PEDIDO
     // ==========================================
+
+    console.clear();
 
     console.log("\n====================================");
     console.log("         PEDIDO CRIADO");

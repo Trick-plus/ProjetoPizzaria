@@ -11,33 +11,34 @@ function formatarData(data) {
     });
 }
 
-export function cadastrarCliente() {
+function mostrarCabecalhoCadastro(titulo) {
     console.clear();
-
     console.log("====================================");
-    console.log("        CADASTRAR CLIENTE");
+    console.log(titulo);
     console.log("====================================");
+}
 
-    let nome = leia.question("Nome: ");
-    let telefone = leia.question("Telefone: ");
-    let endereco = leia.question("Endereco: ");
+export function cadastrarCliente() {
+    mostrarCabecalhoCadastro("CADASTRAR CLIENTE");
 
-    if (nome == "" || telefone == "" || endereco == "") {
+    const nome = leia.question("Nome: ");
+    const telefone = leia.question("Telefone: ");
+    const endereco = leia.question("Endereco: ");
+
+    if (!nome || !telefone || !endereco) {
         console.log("\nPreencha todos os campos.");
         return;
     }
 
-    let cliente = {
+    clientes.push({
         id: gerarIdCliente(),
-        nome: nome,
-        telefone: telefone,
-        endereco: endereco,
+        nome,
+        telefone,
+        endereco,
         atualizadoEm: new Date().toISOString()
-    };
+    });
 
-    clientes.push(cliente);
     salvarDados();
-
     console.log("\nCliente cadastrado com sucesso!");
 }
 

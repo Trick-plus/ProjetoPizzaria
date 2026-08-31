@@ -22,11 +22,25 @@
       "atualizadoEm": "2026-08-27T00:00:00.000Z"
     },
     {
-      "id": 4,
-      "nome": "12",
-      "telefone": "31",
-      "endereco": "3",
-      "atualizadoEm": "2026-08-27T22:16:09.766Z"
+      "id": 5,
+      "nome": "Rojer",
+      "telefone": "(48) 9999-4632",
+      "endereco": "Rua da agua suja",
+      "atualizadoEm": "2026-08-31T21:48:28.064Z"
+    },
+    {
+      "id": 7,
+      "nome": "asf",
+      "telefone": "asfsd",
+      "endereco": "fs",
+      "atualizadoEm": "2026-08-31T21:53:08.288Z"
+    },
+    {
+      "id": 8,
+      "nome": "1",
+      "telefone": "dsfsd",
+      "endereco": "fsf",
+      "atualizadoEm": "2026-08-31T21:56:17.015Z"
     }
   ],
   "pizzas": [
@@ -36,7 +50,7 @@
       "descricao": "Calabresa, queijo e cebola",
       "preco": 45,
       "disponivel": true,
-      "atualizadoEm": "2026-08-27T00:00:00.000Z"
+      "atualizadoEm": "2026-08-31T21:51:56.384Z"
     },
     {
       "id": 2,
@@ -109,9 +123,9 @@
   ],
   "pedidos": [],
   "proximosIds": {
-    "cliente": 5,
+    "cliente": 9,
     "pizza": 5,
     "bebida": 7,
-    "pedido": 1
+    "pedido": 3
   }
 }

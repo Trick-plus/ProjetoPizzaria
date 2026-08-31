@@ -11,34 +11,35 @@ function formatarData(data) {
     });
 }
 
-export function cadastrarBebida() {
+function mostrarCabecalhoCadastro(titulo) {
     console.clear();
-
     console.log("====================================");
-    console.log("           CADASTRAR BEBIDA");
+    console.log(titulo);
     console.log("====================================");
+}
 
-    let nome = leia.question("Nome da bebida: ");
-    let descricao = leia.question("Descricao: ");
-    let preco = leia.questionFloat("Preco: R$ ");
+export function cadastrarBebida() {
+    mostrarCabecalhoCadastro("CADASTRAR BEBIDA");
 
-    if (nome == "" || descricao == "" || preco <= 0) {
+    const nome = leia.question("Nome da bebida: ");
+    const descricao = leia.question("Descricao: ");
+    const preco = leia.questionFloat("Preco: R$ ");
+
+    if (!nome || !descricao || preco <= 0) {
         console.log("\nDados invalidos.");
         return;
     }
 
-    let bebida = {
+    bebidas.push({
         id: gerarIdBebida(),
-        nome: nome,
-        descricao: descricao,
-        preco: preco,
+        nome,
+        descricao,
+        preco,
         disponivel: true,
         atualizadoEm: new Date().toISOString()
-    };
+    });
 
-    bebidas.push(bebida);
     salvarDados();
-
     console.log("\nBebida cadastrada com sucesso!");
 }
 

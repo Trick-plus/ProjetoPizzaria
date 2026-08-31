@@ -11,34 +11,35 @@ function formatarData(data) {
     });
 }
 
-export function cadastrarPizza() {
+function mostrarCabecalhoCadastro(titulo) {
     console.clear();
-
     console.log("====================================");
-    console.log("           CADASTRAR PIZZA");
+    console.log(titulo);
     console.log("====================================");
+}
 
-    let nome = leia.question("Nome da pizza: ");
-    let descricao = leia.question("Descricao: ");
-    let preco = leia.questionFloat("Preco: R$ ");
+export function cadastrarPizza() {
+    mostrarCabecalhoCadastro("           CADASTRAR PIZZA");
 
-    if (nome == "" || descricao == "" || preco <= 0) {
+    const nome = leia.question("Nome da pizza: ");
+    const descricao = leia.question("Descricao: ");
+    const preco = leia.questionFloat("Preco: R$ ");
+
+    if (!nome || !descricao || preco <= 0) {
         console.log("\nDados invalidos.");
         return;
     }
 
-    let pizza = {
+    pizzas.push({
         id: gerarIdPizza(),
-        nome: nome,
-        descricao: descricao,
-        preco: preco,
+        nome,
+        descricao,
+        preco,
         disponivel: true,
         atualizadoEm: new Date().toISOString()
-    };
+    });
 
-    pizzas.push(pizza);
     salvarDados();
-
     console.log("\nPizza cadastrada com sucesso!");
 }
 
