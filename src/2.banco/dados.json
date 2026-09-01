@@ -20,13 +20,6 @@
       "telefone": "(48) 97777-3333",
       "endereco": "Avenida Brasil, 500",
       "atualizadoEm": "2026-08-27T00:00:00.000Z"
-    },
-    {
-      "id": 5,
-      "nome": "Patrick",
-      "telefone": "(48) 99906-2026",
-      "endereco": "Rua Maria isabel",
-      "atualizadoEm": "2026-09-01T14:38:40.501Z"
     }
   ],
   "pizzas": [
@@ -36,7 +29,7 @@
       "descricao": "Calabresa, queijo e cebola",
       "preco": 45,
       "disponivel": true,
-      "atualizadoEm": "2026-09-01T13:54:29.033Z"
+      "atualizadoEm": "2026-08-27T00:00:00.000Z"
     },
     {
       "id": 2,
@@ -107,34 +100,11 @@
       "atualizadoEm": "2026-08-27T00:00:00.000Z"
     }
   ],
-  "pedidos": [
-    {
-      "id": 1,
-      "clienteId": 1,
-      "itens": [
-        {
-          "tipo": "P",
-          "produtoId": 1,
-          "nome": "Calabresa",
-          "quantidade": 1,
-          "precoUnitario": 45
-        },
-        {
-          "tipo": "B",
-          "produtoId": 2,
-          "nome": "Guarana Antarctica 2L",
-          "quantidade": 1,
-          "precoUnitario": 10
-        }
-      ],
-      "total": 55,
-      "status": "Saiu para entrega"
-    }
-  ],
+  "pedidos": [],
   "proximosIds": {
-    "cliente": 6,
+    "cliente": 4,
     "pizza": 5,
-    "bebida": 8,
-    "pedido": 2
+    "bebida": 7,
+    "pedido": 1
   }
 }
