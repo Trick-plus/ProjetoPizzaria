@@ -65,7 +65,7 @@ export function buscarCliente() {
     let i = 0;
 
     while (i < clientes.length) {
-        if (clientes[i].nome.toLowerCase() == nome.toLowerCase()) {
+        if (clientes[i].nome.toLowerCase().includes(nome.toLowerCase())) {
             console.log("\nCliente encontrado!");
             console.log("ID: " + clientes[i].id);
             console.log("Nome: " + clientes[i].nome);
@@ -169,7 +169,7 @@ export function excluirCliente() {
         if (pedidos[i].clienteId == id) {
             possuiPedido = true;
         }
-
+        
         i++;
     }
 

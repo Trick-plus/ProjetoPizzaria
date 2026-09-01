@@ -217,7 +217,7 @@ export function excluirPizza() {
         let j = 0;
 
         while (j < pedidos[i].itens.length) {
-            if (pedidos[i].itens[j].pizzaId == id) {
+            if (pedidos[i].itens[j].tipo == "P" && pedidos[i].itens[j].produtoId == id) {
                 possuiPedido = true;
             }
 

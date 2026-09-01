@@ -1,7 +1,5 @@
 import leia from "readline-sync";
 
-import { limparTela } from "../utilitarios/utilitarios.js";
-
 import {
     cadastrarCliente,
     listarClientes,
@@ -40,7 +38,7 @@ export function menuPrincipal() {
     let opcao = -1;
 
     while (opcao != 0) {
-        limparTela();
+        console.clear();
 
         console.log("====================================");
         console.log("     SISTEMA DE GERENCIAMENTO");
@@ -48,25 +46,25 @@ export function menuPrincipal() {
         console.log("====================================");
         
         console.log("\n1 - Clientes");
-        console.log("2 - Pizzas");
-        console.log("3 - Bebidas");
-        console.log("4 - Pedidos");
+        console.log("2 - Pedidos");
+        console.log("3 - Pizzas");
+        console.log("4 - Bebidas");
         console.log("0 - Sair");
 
         opcao = leia.questionInt("\nEscolha uma opcao: ");
 
         if (opcao == 1) {
-            limparTela();
+            console.clear();
             menuClientes();
         } else if (opcao == 2) {
-            limparTela();
-            menuPizzas();
-        } else if (opcao == 3) {
-            limparTela();
-            menuBebidas();
-        } else if (opcao == 4) {
-            limparTela();
+            console.clear();
             menuPedidos();
+        } else if (opcao == 3) {
+            console.clear();
+            menuPizzas();
+        } else if (opcao == 4) {
+            console.clear();
+            menuBebidas();
         } else if (opcao == 0) {
             console.log("\nSistema encerrado.");
         } else {
@@ -80,7 +78,7 @@ export function menuClientes() {
     let opcao = -1;
 
     while (opcao != 0) {
-        limparTela();
+        console.clear();
 
         console.log("====================================");
         console.log("             CLIENTES");
@@ -96,19 +94,19 @@ export function menuClientes() {
         opcao = leia.questionInt("\nEscolha: ");
 
         if (opcao == 1) {
-            limparTela();
+            console.clear();
             cadastrarCliente();
         } else if (opcao == 2) {
-            limparTela();
+            console.clear();
             listarClientes();
         } else if (opcao == 3) {
-            limparTela();
+            console.clear();
             buscarCliente();
         } else if (opcao == 4) {
-            limparTela();
+            console.clear();
             alterarCliente();
         } else if (opcao == 5) {
-            limparTela();
+            console.clear();
             excluirCliente();
         } else if (opcao != 0) {
             console.log("\nOpcao invalida.");
@@ -124,7 +122,7 @@ export function menuPizzas() {
     let opcao = -1;
 
     while (opcao != 0) {
-        limparTela();
+        console.clear();
 
         console.log("====================================");
         console.log("              PIZZAS");
@@ -141,22 +139,22 @@ export function menuPizzas() {
         opcao = leia.questionInt("\nEscolha: ");
 
         if (opcao == 1) {
-            limparTela();
+            console.clear();
             cadastrarPizza();
         } else if (opcao == 2) {
-            limparTela();
+            console.clear();
             listarPizzas();
         } else if (opcao == 3) {
-            limparTela();
+            console.clear();
             buscarPizza();
         } else if (opcao == 4) {
-            limparTela();
+            console.clear();
             alterarPizza();
         } else if (opcao == 5) {
-            limparTela();
+            console.clear();
             alterarDisponibilidadePizza();
         } else if (opcao == 6) {
-            limparTela();
+            console.clear();
             excluirPizza();
         } else if (opcao != 0) {
             console.log("\nOpcao invalida.");
@@ -172,7 +170,7 @@ export function menuBebidas() {
     let opcao = -1;
 
     while (opcao != 0) {
-        limparTela();
+        console.clear();
 
         console.log("====================================");
         console.log("              BEBIDAS");
@@ -189,22 +187,22 @@ export function menuBebidas() {
         opcao = leia.questionInt("\nEscolha: ");
 
         if (opcao == 1) {
-            limparTela();
+            console.clear();
             cadastrarBebida();
         } else if (opcao == 2) {
-            limparTela();
+            console.clear();
             listarBebidas();
         } else if (opcao == 3) {
-            limparTela();
+            console.clear();
             buscarBebida();
         } else if (opcao == 4) {
-            limparTela();
+            console.clear();
             alterarBebida();
         } else if (opcao == 5) {
-            limparTela();
+            console.clear();
             alterarDisponibilidadeBebida();
         } else if (opcao == 6) {
-            limparTela();
+            console.clear();
             excluirBebida();
         } else if (opcao != 0) {
             console.log("\nOpcao invalida.");
@@ -220,7 +218,7 @@ export function menuPedidos() {
     let opcao = -1;
 
     while (opcao != 0) {
-        limparTela();
+        console.clear();
 
         console.log("====================================");
         console.log("              PEDIDOS");
@@ -236,19 +234,19 @@ export function menuPedidos() {
         opcao = leia.questionInt("\nEscolha: ");
 
         if (opcao == 1) {
-            limparTela();
+            console.clear();
             criarPedido();
         } else if (opcao == 2) {
-            limparTela();
+            console.clear();
             listarPedidos();
         } else if (opcao == 3) {
-            limparTela();
+            console.clear();
             consultarPedido();
         } else if (opcao == 4) {
-            limparTela();
+            console.clear();
             alterarStatusPedido();
         } else if (opcao == 5) {
-            limparTela();
+            console.clear();
             excluirPedido();
         } else if (opcao != 0) {
             console.log("\nOpcao invalida.");

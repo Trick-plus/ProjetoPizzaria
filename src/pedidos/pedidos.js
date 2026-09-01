@@ -198,7 +198,6 @@ export function criarPedido() {
         }
     }
 
-    // VERIFICAR SE EXISTEM ITENS
     if (itens.length == 0) {
 
         console.log("\nNenhum produto foi adicionado.");
@@ -207,8 +206,6 @@ export function criarPedido() {
         return;
     }
 
-
-    // CALCULAR TOTAL
     let total = 0;
 
     i = 0;
@@ -224,9 +221,6 @@ export function criarPedido() {
     }
 
 
-    // CRIAR PEDIDO
-  
-
     let pedido = {
         id: gerarIdPedido(),
         clienteId: clienteId,
@@ -237,10 +231,6 @@ export function criarPedido() {
 
     pedidos.push(pedido);
     salvarDados();
-
-    // ==========================================
-    // MOSTRAR PEDIDO
-    // ==========================================
 
     console.clear();
 
@@ -338,8 +328,11 @@ export function consultarPedido() {
 
             while (j < pedidos[i].itens.length) {
                 console.log(
-                    "Pizza ID: " +
-                    pedidos[i].itens[j].pizzaId +
+                    pedidos[i].itens[j].tipo +
+                    " | Produto ID: " +
+                    pedidos[i].itens[j].produtoId +
+                    " | Nome: " +
+                    pedidos[i].itens[j].nome +
                     " | Quantidade: " +
                     pedidos[i].itens[j].quantidade +
                     " | Preco: R$ " +

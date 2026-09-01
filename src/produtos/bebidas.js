@@ -217,7 +217,7 @@ export function excluirBebida() {
         let j = 0;
 
         while (j < pedidos[i].itens.length) {
-            if (pedidos[i].itens[j].bebidaId == id) {
+            if (pedidos[i].itens[j].tipo == "B" && pedidos[i].itens[j].produtoId == id) {
                 possuiPedido = true;
             }
 

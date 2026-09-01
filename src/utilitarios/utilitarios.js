@@ -1,7 +1,3 @@
-export function limparTela() {
-    console.clear();
-}
-
 export function formatarData(data) {
     return new Date(data).toLocaleString("pt-BR", {
         day: "2-digit",
@@ -13,7 +9,7 @@ export function formatarData(data) {
 }
 
 export function mostrarCabecalhoCadastro(titulo) {
-    limparTela();
+    console.clear();
     console.log("====================================");
     console.log(titulo);
     console.log("====================================");
